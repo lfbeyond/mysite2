@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load staticfiles %}
+    {% for post in posts %}
+    <article class="post">
+        <div class="title">
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            {% if post.category %}
+                {% for i in post.category %}
+                    <a class=" fa fa-star-half-empty " href="{% url 'search_tag' tag=i %}"  >{{ i }}</a>
+                {% endfor %}
+            {% endif %}
+         <p><a class="fa  fa-edit " href="{% url 'post_edit' pk=post.pk %}">修改<span class="glyphicon glyphicon-pencil"></span></a>
+         <a class="fa fa-trash-o" href="{% url 'post_remove' pk=post.pk %}">删除<span class="glyphicon glyphicon-remove"></span></a>
+         </p>
+        </div>
+        <div class="meta">
+            {% if post.published_date %}
+                <time class="published" datetime="2017-10-22">{{ post.published_date |date:'M d, Y'}}</time>
+            {% endif %}
+            <a href="{% url 'search_user' user_id=post.author_id %}" class="author"><span class="name">{{ post.author }}</span><img src="{% static 'images/avatar.jpg' %}" alt=""/></a>
+            <a class=" fa fa-send " href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+        </div>
+            <a href="#" class="image featured"></a>
+             <p>{{ post.text|safe|linebreaks }}</p>
+
+    </article>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "blog/base.html" %}
+{% block content %}
+<div class="posts">
+    {% if error %}
+        <h2 class="post-title">没有相关文章题目</h2>
+    {% else %}
+        {% for post in post_list %}
+        <article class="post">
+            <h3 class="blog-post-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+            <div class="blog-post">
+            <div class="date">
+                {% if post.published_date %}
+                    {{ post.published_date |date:'M d, Y'}}
+                {% endif %}
+            </div>
+            <p>作者： <a class="post-category post-category-js" href="{% url 'search_user' user_id=post.author_id %}">{{ post.author }}</a></p>
+            <p>
+            {% if post.category %}
+                {% for i in post.category %}
+                    <a class=" fa fa-star-half-empty " href="{% url 'search_tag' tag=i %}">{{ i |title }}</a>
+                {% endfor %}
+            {% endif %}        </p>
+            <p>{{ post.text|safe|linebreaks|truncatewords:5}}</p><br />
+            </div>
+        </article>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

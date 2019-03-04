@@ -1,0 +1,51 @@
+
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html>
+<head>
+<title>注册</title>
+<!-- Custom Theme files -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}" >
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!--Google Fonts-->
+<!--Google Fonts-->
+</head>
+<body>
+<div class="login">
+	<div class="login-top">
+		<h1>用户注册</h1>
+		<form action="{% url 'register' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+            {% csrf_token %}
+			<!--<input type="text" value="User Id" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
+			<input type="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">-->
+			<input type="text" name="username" id="username" placeholder="请输入手机号" value="">
+			<input type="password" value="" name="password" id="password" placeholder="请输入6-12位密码">
+            <div class="checkbox">
+                <label>
+                    {% if userExit %}
+					<a>该用户已存在</a>
+					{% endif %}
+					<input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+	    <div class="forgot">
+	    	<!--<a href="#">忘记密码</a>-->
+	    	<input type="submit" value="注册" >
+	    </div>
+         </form>
+	</div>
+	<div class="login-bottom">
+		<h3>已有账户？ &nbsp;<a href="{% url 'login' %}">登录</a>&nbsp Here</h3>
+	</div>
+</div>
+<div class="copyright">
+	<p>Copyright &copy; li,s django blog<a target="_blank" href="{% url 'about_me' %}">关于li's django blog</a> - More Templates <a href="{% url 'post_list' %}"  target="_blank" title="保留">返回首页</a></p>
+</div>
+
+
+</body>
+</html>

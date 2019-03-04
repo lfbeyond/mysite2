@@ -1,0 +1,208 @@
+{% load staticfiles %}
+<html>
+	<head>
+		<title>li,s django blog</title>
+			{{ form.media }}
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="viewport" content="width=device-width,height=device-height,inital-scale=1.0,maximum-scale=1.0,user-scalable=no;">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="format-detection" content="telephone=no">
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<link rel="shortcut icon" href="{% static '/images/favicon.ico' %}">
+		<script src="{% static 'js/jquery.min.js' %}"></script>
+		<!--<script src="{% static 'js/base.js' %}"></script>-->
+		<!--<script src="{% static 'js/bootstrap.min.js' %}"></script>-->
+		<script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+		<style type="text/css">
+        .fixed_div{
+        position:fixed;
+        right:100px;
+        bottom:100px;
+{#        width:20px;#}
+{#        height: 20px;#}
+        }
+    </style>
+	</head>
+	<body>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="/">li,s django blog</a></h1>
+						<nav class="links">
+							<ul>
+								<li><a href="/">首页</a></li>
+								<li><a href="{% url 'archives' %}">所有文章</a></li>
+								{% if user.is_authenticated %}
+								<li><a href="{% url 'post_new' %}">新建</a></li>
+								<li><a href="{% url 'post_draft_list' user_sigin=user.id%}">草稿</a></li>
+								<li><a href="{% url 'logout' %}"> 注销</a></li>
+								{% else %}
+								<li><a href="{% url 'login' %}">登录</a></li>
+								<li><a href="{% url 'register' %}">注册</a></li>
+								{% endif %}
+								<li><a href="{% url 'about_me' %}">关于</a></li>
+							</ul>
+						</nav>
+						<nav class="main">
+							<ul>
+								<li class="search">F
+									<a class="fa-search" href="#search">Search</a>
+									<form id="search" method="get" action="/search/">
+										<input type="text" name="s" placeholder="search" />
+									</form>
+								</li>
+								<li class="menu">
+									<a class="fa-bars" href="#menu">Menu</a>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Menu -->
+					<section id="menu">
+
+						<!-- Search -->
+							<section>
+								<form class="search" method="get" action="/search/">
+									<input type="text" name="s" placeholder="search" />
+								</form>
+							</section>
+
+						<!-- Links -->
+							<section>
+								<ul class="actions vertical">
+										<li><a class="button button-glow button-border button-rounded button-primary" href="{% url 'archives' %}">所有文章</a></li>
+									{% if user.is_authenticated %}
+										<li><a class="button button-glow button-border button-rounded button-primary" href="{% url 'post_new' %}">新建</a>
+										<a class="button button-glow button-border button-rounded button-primary"  href="{% url 'post_draft_list' user_sigin=user.id%}">我的草稿</a></li>
+									{% endif %}
+									{% if user.is_authenticated %}
+										<li><a href="{% url 'logout' %}" class="button big fit">Log Out</a></li>
+									{% else %}
+										<li><a href="{% url 'login' %}" class="button big fit">Log In</a></li>
+										<li><a href="{% url 'register' %}" class="button big fit">注册</a></li>
+									{% endif %}
+
+								</ul>
+							</section>
+
+							<section>
+								<ul class="links">
+									<li>
+										<a href="#">
+											<h3>热门标签</h3>
+										</a>
+									</li>
+									{% for x,y in tags %}
+										{% if forloop.counter < 6 %}
+											<a class=" fa fa-star-half-empty " href="{% url 'search_tag' tag=x %}">{{ x|title }}</a><font color="#a9a9a9"> ({{ y }})</font></a>
+										{% endif %}
+									{% endfor %}
+									<li>
+										<a href="#">
+											<h3>日期归档</h3>
+										</a>
+									</li>
+									{% for x in date_list %}
+
+                                		<li><a class="fa fa-calendar " href="{% url 'search_date' y=x.0 m=x.1 %}">{{ x.0 }}年{{ x.1 }}月</a><font color="#a9a9a9"> ({{ x.2 }})</font>
+										</li>
+                        			{% endfor %}
+
+									<!--
+									<li>
+										<a href="#">
+											<h3>Feugiat veroeros</h3>
+											<p>Phasellus sed ultricies mi congue</p>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<h3>Etiam sed consequat</h3>
+											<p>Porta lectus amet ultricies</p>
+										</a>
+									</li>
+									-->
+								</ul>
+							</section>
+
+						<!-- Actions -->
+
+
+					</section>
+				<!--登录-->
+					<section id="login">
+						<section>
+
+							</section>
+
+
+					</section>
+
+				<!-- Main -->
+					<div id="main">
+						{% block content %}
+						{% endblock %}
+
+					</div>
+
+				<!-- Sidebar -->
+					<section id="sidebar">
+
+						<!-- Intro -->
+							<section id="intro">
+								<a href="#" class="logo"><img src="{% static '/static/images/logo.jpg' %}" alt="" /></a>
+								<header>
+									<h2>li's django blog </h2>
+								</header>
+							</section>
+
+						<!-- About -->
+							<section class="blurb">
+								<h2>About</h2>
+								<p>这是我的 django学习之路 搭建的博客.</p>
+								<ul class="actions">
+									<li><a href="{% url 'about_me' %}" class="button">Learn More</a></li>
+								</ul>
+							</section>
+
+						<!-- Footer -->
+							<section id="footer">
+								<ul class="icons">
+									<li><a href="#" class="fa-twitter"><span class="label">Twitter</span></a></li>
+									<li><a href="#" class="fa-facebook"><span class="label">Facebook</span></a></li>
+									<li><a href="#" class="fa-instagram"><span class="label">Instagram</span></a></li>
+									<li><a href="#" class="fa-rss"><span class="label">RSS</span></a></li>
+									<li><a href="#" class="fa-envelope"><span class="label">Email</span></a></li>
+								</ul>
+							</section>
+
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="{% static 'js/jquery.min.js' %}"></script>
+			<script src="{% static 'js/skel.min.js'%}"></script>
+			<script src="{% static 'js/util.js' %}"></script>
+			<!--[if lte IE 8]><script src="{% static 'js/ie/respond.min.js' %}"></script><![endif]-->
+			<script src="{% static 'js/main.js' %}"></script>
+		<div class="fixed_div">
+        	<a id="gotop" href="#" onclick="MGJS.goTop();return false;">
+            	<button type="button"  style="font-size: 2px">
+                	<span class="fa fa-arrow-circle-up">TOP</span>
+           		 </button>
+       		 </a>
+    	</div>
+	</body>
+</html>
+           
+            

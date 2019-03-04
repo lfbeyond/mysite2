@@ -1,0 +1,58 @@
+{% extends 'blog/base.html' %}
+{% load staticfiles %}
+{% block content %}
+{% for post in posts %}
+					<!-- Post -->
+							<article class="post">
+								<header>
+									<div class="title">
+										<h2><a href="{% url 'post_detail' pk=post.id %}">{{ post.title }}</a></h2>
+										{% if post.category %}
+											{% for i in post.category %}
+											<a class=" fa fa-star-half-empty " href="{% url 'search_tag' tag=i %}">{{ i }}</a>
+											{% endfor %}
+										{% endif %}
+									</div>
+									<div class="meta">
+										{% if post.published_date %}
+										<time class="published" datetime="2017-10-22">{{ post.published_date |date:'M d, Y'}}</time>
+										{% endif %}
+										<a href="{% url 'search_user' user_id=post.author_id %}" class="author"><span class="name">{{ post.author }}</span><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+									</div>
+								</header>
+									<a href="#" class="image featured"><img src="{% static 'images/pic03.jpg' %}" alt="" /></a>
+									<!--<p>{{ post.text|safe|linebreaks|truncatewords:5 }}</p>-->
+								<footer>
+									<ul class="actions">
+										<li><a href="{% url 'post_detail' pk=post.pk %}" class="button big">Continue Reading</a></li>
+									</ul>
+									<ul class="stats">
+										<li><a href="#">General</a></li>
+										<li><a href="#" class="icon fa-heart">28</a></li>
+										<li><a href="#" class="icon fa-comment">128</a></li>
+									</ul>
+								</footer>
+							</article>
+
+
+{% endfor %}
+{% if page %}
+<!-- Pagination -->
+		<ul class="actions pagination">
+			{% if posts.has_previous %}
+				<li><a href="?page={{ posts.previous_page_number }}" class="button big next" >上一页</a></li>
+			{% endif %}
+			{% for page_number in posts.paginator.page_range %}
+				{% ifequal page_number  posts.number %}
+					<li>{{ page_number }}</li>
+				{% else %}
+					<li><a href="?page={{ page_number }}" >{{ page_number }}</a></li>
+				{% endifequal %}
+			{% endfor %}
+			{% if posts.has_next %}
+				<li><a href="?page={{ posts.next_page_number }}" class="button big next">下一页</a></li>
+			{% endif %}
+
+		</ul>
+{% endif %}
+{% endblock content %}

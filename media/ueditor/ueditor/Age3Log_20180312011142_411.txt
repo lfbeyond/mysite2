@@ -1,0 +1,19 @@
+===============================================================
+File 'Age3Log.txt' opened at Fri Aug 11 20:28:13 2017
+
+===============================================================
+
+PreGame  7693:  Game locale: English
+PreGame  8615:  nvCPL is unavailable.
+PreGame  9557:  ------------------------------------------------------------------------
+PreGame  9557:  Render using: NVIDIA GeForce GTX 260
+PreGame  9557:     Driver: nvd3dum.dll -- version 9.18.13.4195
+PreGame  9576:     VendorID = 0x10de
+PreGame  9576:     DeviceID = 0x5e2
+PreGame  9576:     SubSysID = 0x68e10de
+PreGame  9576:     Revision = 0xa1
+PreGame  9576:     DeviceIdentifier: {D7B71E3E-46A2-11CF-0D63-83261CC2C435}
+PreGame  9680:     XML render config -- found vendor 0x10DE as 'NVIDIA'
+PreGame  9680:     XML render config -- choosing generic device configuration file 'geforce fx 6800'
+PreGame  23652:  Game startup complete (23.65 sec)!
+PreGame  23652:  ------------------------------------------------------------

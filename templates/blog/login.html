@@ -1,0 +1,48 @@
+
+<!DOCTYPE HTML>
+{% load staticfiles %}
+<html>
+<head>
+<title>Home</title>
+<!-- Custom Theme files -->
+<link rel="stylesheet" href="{% static 'css/style.css' %}" >
+<!-- Custom Theme files -->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="keywords" content="Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
+<!--Google Fonts-->
+</head>
+<body>
+<div class="login">
+	<h2>用户登录</h2>
+	<div class="login-top">
+		<h1>用户登录</h1>
+		<form action="{% url 'login' %}" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+            {% csrf_token %}
+			<!--<input type="text" value="User Id" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'User Id';}">
+			<input type="password" value="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">-->
+			<input type="text" id="username" name="username" placeholder="用户名"  value="">
+			<input type="password" value="passwd" id="password"  name="password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'password';}">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+	    <div class="forgot">
+	    	<a href="#">忘记密码</a>
+	    	<input type="submit" value="Login" >
+	    </div>
+         </form>
+	</div>
+	<div class="login-bottom">
+		<h3>新用户 &nbsp;<a href="{% url 'register' %}">注册</a>&nbsp Here</h3>
+	</div>
+</div>
+<div class="copyright">
+	<p>Copyright &copy; li,s django blog<a target="_blank" href="{% url 'about_me' %}">关于li's django blog</a> - More Templates <a href="{% url 'post_list' %}"  target="_blank" title="保留">返回首页</a></p>
+</div>
+
+
+</body>
+</html>

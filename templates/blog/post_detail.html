@@ -1,0 +1,106 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+{% load staticfiles %}
+<div class="posts">
+    <article class="post">
+				<header>
+					<div class="title">
+						<h2><a href="#">{{ post.title }}</a></h2>
+						{% if post.category %}
+                			{% for i in post.category %}
+                                <a class=" fa fa-tag " href="{% url 'search_tag' tag=i %}"  >{{ i }}</a>
+							{% endfor %}
+            			{% endif %}
+                        {% if user.is_authenticated %}
+                            {% if user == post.author %}
+                                {% if not post.published_date %}
+                                    <a class=" fa fa-send " href="{% url 'post_publish' pk=post.pk %}">Publish</a>
+                                {% endif %}
+                                <li><a class="fa  fa-edit " href="{% url 'post_edit' pk=post.pk %}">修改<span class="glyphicon glyphicon-pencil"></span></a>
+                                <a class="fa fa-trash-o" href="{% url 'post_remove' pk=post.pk %}">删除<span class="glyphicon glyphicon-remove"></span></a>
+                                 </li>
+                             {% endif %}
+                        {% endif %}
+					</div>
+					<div class="meta">
+                        {% if post.published_date %}
+						<time class="published" datetime="2015-11-01">{{ post.published_date|date:'M d, Y' }}</time>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'search_user' user_id=post.author_id %}" class="author"><span class="name">{{ post.author }}</span><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+                        {% else %}
+                            <a href="{% url 'search_user' user_id=post.author_id %}" class="author"><span class="name"></span><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+                        {% endif %}
+
+                    </div>
+				</header>
+				<p>{{ post.text|safe|linebreaks }}</p>
+				<footer>
+					<ul class="stats">
+                        <li><a href="#" class="icon fa-heart">28</a></li>
+						<li><a href="#" class="icon fa-comment">128</a></li>
+						<div></div>
+                        {% if before_page %}
+                            <li><a class="button arrowleft" href="{% url 'post_detail' pk=before_page.pk %}">上一篇：{{ before_page }}</a></li>
+                        {% endif %}
+                        {% if after_page %}
+						    <li><a <a class="button arrowleft"  href="{% url 'post_detail' pk=after_page.pk %}">下一篇 {{ after_page }}</a></li>
+                        {% endif %}
+					</ul>
+				</footer>
+    </article>
+</div>
+
+<div class="posts">
+    <article class="post">
+    <h3>评论</h3>
+    <ul >
+        {% for comment in comment_list %}
+        <p>
+        <li  class="comment-item">
+            <span class="fa fa-github-alt">{{ comment.name }}</span> <a>   </a>     <time class="fa fa-clock-o">{{ comment.created_time }}</time>
+        </li>
+            <div  class=" fa fa-comment-o" class="text">
+                评论:<a class="post-title"  >{{ comment.text|safe|linebreaks }}</a>
+            </div>
+        </p>
+        {% empty %}
+        <div class=" fa fa-comment-o">暂无评论</div>
+        {% endfor %}
+    </ul>
+     </article>
+</div>
+
+
+<div class="posts">
+    <article class="post">
+     <h3>发表评论</h3>
+{% if post.published_date %}
+    <form action="{% url 'comments:post_comment' post.pk %}" method="post" class="post-form">{% csrf_token %}
+    <div class="row">
+    <div class="col-md-4">
+      <label for="{{ form.name.id_for_label }}">名字：</label>
+      {{ form.name }}
+      {{ form.name.errors }}
+    </div>
+    <div class="col-md-4">
+      <label for="{{ form.email.id_for_label }}">邮箱：</label>
+      {{ form.email }}
+      {{ form.email.errors }}
+    </div>
+    <div class="col-md-12">
+      <label value="xxxxxxx" for="{{ form.text.id_for_label }}">评论：</label>
+      {{ form.text }}
+      {{ form.text.errors }}
+      <button class="button " type="submit" >发表</button>
+    </div>
+    </div>    <!-- row -->
+
+    </form>
+    </article>
+</div>
+
+{% endif %}
+
+
+{% endblock %}
