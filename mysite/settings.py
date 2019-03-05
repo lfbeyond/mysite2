@@ -49,7 +49,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
      # 站点缓存 ， 注意必须在第一个位置    
-#    'django.middleware.cache.UpdateCacheMiddleware',    
+   'django.middleware.cache.UpdateCacheMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -58,7 +59,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
      # 站点缓存, 注意必须在最后一个位置
- #   'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'

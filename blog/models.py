@@ -5,6 +5,7 @@ from DjangoUeditor.models import UEditorField
 
 class Article(models.Model):
     author = models.ForeignKey(User)
+    author_name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     category = models.CharField(max_length=50, blank=True)
     #text = models.TextField()

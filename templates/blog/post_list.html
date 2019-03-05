@@ -17,7 +17,7 @@
 										{% if post.published_date %}
 										<time class="published" datetime="2017-10-22">{{ post.published_date |date:'M d, Y'}}</time>
 										{% endif %}
-										<a href="{% url 'search_user' user_id=post.author_id %}" class="author"><span class="name">{{ post.author }}</span><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
+										<a href="{% url 'search_user' user_id=post.author_id %}" class="author"><span class="name">{{ post.author_name }}</span><img src="{% static 'images/avatar.jpg' %}" alt="" /></a>
 									</div>
 								</header>
 									<a href="#" class="image featured"><img src="{% static 'images/pic03.jpg' %}" alt="" /></a>

@@ -2,14 +2,14 @@
 {% block content %}
     {% for post in post_list %}
         <article class="post">
-            <h3 class="blog-post-title"><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h3>
+            <h3 class="blog-post-title"><a href="{% url 'post_detail' pk=post.id %}">{{ post.title }}</a></h3>
             <div class="blog-post">
             <div class="date">
                 {% if post.published_date %}
                     {{ post.published_date |date:'M d, Y'}}
                 {% endif %}
             </div>
-            <p>作者： <a class="post-category post-category-js" href="{% url 'search_user' user_id=post.author_id %}">{{ post.author }}</a></p>
+            <p>作者： <a class="post-category post-category-js" href="{% url 'search_user' user_id=post.author %}">{{ post.author_name }}</a></p>
             <p>
             {% if post.category %}
                 {% for i in post.category %}

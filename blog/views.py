@@ -20,10 +20,11 @@ from comments.forms import CommentForm
 
 from django.conf import settings
 from django.views.decorators.cache  import  cache_page
+from django.contrib import messages
 
 @cache_page(60)
 def post_list(request):
-    postsAll = Article.objects.values('id','title','author','category','published_date').annotate(num_comment=Count('id')).filter(published_date__isnull=False).order_by('-published_date')
+    postsAll = Article.objects.values('id','title','author','author_name','category','published_date').annotate(num_comment=Count('id')).filter(published_date__isnull=False).order_by('-published_date')
     #postsAll = Article.objects.annotate(num_comment=Count('id')).filter(published_date__isnull=False).order_by('-published_date')
     tags,date_list2=get_tags()
     for p in postsAll:
@@ -61,7 +62,8 @@ def post_detail(request, pk):
     tags,date_list2= get_tags()
     #date_list2 = date_list()
     post = get_object_or_404(Article, pk=str(pk))
-    print("------------------post_detail")
+    #print(post.id)
+    #print("------------------post_detail")
     post.text = markdown.markdown(post.text, extras=[
                                      'markdown.extensions.extra',
                                      'markdown.extensions.codehilite',
@@ -73,27 +75,32 @@ def post_detail(request, pk):
     form = CommentForm()
     # 获取这篇 post 下的全部评论
     comment_list = post.comment_set.all()
-    print(comment_list)
+    #print(comment_list)
+
     if post.published_date == None:
         return render(request, 'blog/post_detail.html',
                       {'post': post, 'comment_list': comment_list, 'form': form,'tags':tags,'date_list':date_list2})
     else:
         print("------------------post_detail3")
-        postsAll = Article.objects.annotate(num_comment=Count('id')).filter(
+        postsAll = Article.objects.values('id','title').filter(
             published_date__isnull=False).order_by('-published_date')
         page_list = list(postsAll)
+        print('==============----------------====================')
         print(page_list)
-        if post == page_list[-1]:
-             print(post)
+        if post.id == page_list[-1]['id']:
+             #print(post)
              before_page = page_list[-2]
              after_page = None
-        elif post == page_list[0]:
-             print(post)
+        elif post.id == page_list[0]['id']:
+             #print(post)
              before_page = None
              after_page = page_list[1]
         else:
-             print(post.pk)
-             situ = page_list.index(post)
+             #print(post.id)
+             p_list=[]
+             for i in page_list:
+                 p_list.append(i['id'])
+             situ = p_list.index(post.id)
              before_page = page_list[situ-1]
              after_page = page_list[situ+1]
         print("------------------- %s" %before_page )
@@ -167,12 +174,12 @@ def archives(request):
     tags,date_list2=get_tags()
     #date_list2 = date_list()
     try:
-        post_list = Article.objects.all().filter(published_date__isnull=False).order_by('-published_date')
+        post_list = Article.objects.values('id','title','author','author_name','published_date').filter(published_date__isnull=False).order_by('-published_date')
         post_list2=[]
         for a in post_list:
-            print("user------------------author1 %s" % a.author.id)
-            a.user = a.author
-            print("user------------------author %s" %a.user)
+            #print("user------------------author1 %s" % a.author.id)
+            a['user'] = a['author']
+            #print("user------------------author %s" %a.user)
     except Article.DoesNotExist:
         raise Http404
     print(post_list)
@@ -185,10 +192,10 @@ def search_tag(request, tag):
     tags,date_list2=get_tags()
     #date_list2 = date_list()
     try:
-        post_list = Article.objects.filter(category__icontains=tag).filter(published_date__isnull=False).order_by('-published_date')
+        post_list = Article.objects.values('id','category','title','author','author_name','published_date').filter(category__icontains=tag).filter(published_date__isnull=False).order_by('-published_date')
         for pp in post_list:
-            pp.category = pp.category.split()
-            pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
+            pp['category'] = pp['category'].split()
+            #pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
             print("tag-------------- %s" %date_list2)
     except Article.DoesNotExist:
         raise Http404
@@ -207,32 +214,32 @@ def blog_search(request):
     #date_list2 = date_list()
     if 's' in request.GET:
         s = request.GET['s']
+        print('search-----------------------------------------')
         print(s)
         if not s:
-            return render(request,'blog/post_list.html')
+            #messages.add_message(request, messages.INFO, 'Hello world.')
+            return redirect('/')
         else:
-            post_list = Article.objects.filter(category__icontains=s).order_by('-published_date')
+            post_list = Article.objects.values('id','category','title','author','author_name','published_date').filter(category__icontains=s).order_by('-published_date')
             if len(post_list) == 0 :
-                return render(request, 'blog/search.html', {'post_list': post_list, 'error': True})
+                #messages.success(request, "不能为空")
+                return render(request, 'blog/search.html', {'error': 'ture','message':messages})
             else:
                 for pp in post_list:
-                    pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
-                    pp.category = pp.category.split()
+                    #pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
+                    pp['category'] = pp['category'].split()
                 return render(request, 'blog/search.html', {'post_list': post_list, 'error': False,'tags':tags,'date_list':date_list2})
 
     return redirect('/')
 
 def search_user(request, user_id):
     tags,date_list2=get_tags()
-    #date_list2 = date_list()
     print(user_id)
     try:
-        post_list = Article.objects.filter(author_id=user_id).filter(published_date__isnull=False).order_by('-published_date')
-        print(post_list)
-
+        post_list = Article.objects.values('id','title','category','author','author_name','published_date').filter(author_id=user_id).filter(published_date__isnull=False).order_by('-published_date')
         for pp in post_list:
-            pp.category=pp.category.split()
-            pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
+            pp['category']=pp['category'].split()
+            #pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
     except Article.DoesNotExist:
         raise Http404
 
@@ -244,18 +251,18 @@ def search_date(request,y,m):
     print("----------------------------------------------")
     print(y,m)
     try:
-        post_list = Article.objects.filter(published_date__isnull=False).order_by('-published_date')
+        post_list = Article.objects.values('id','title','category','published_date').filter(published_date__isnull=False).order_by('-published_date')
         #print(post_list)
         post_list2 = []
         for pp in post_list:
-            if str(pp.published_date.year) == y and str(pp.published_date.month) == m:
-                pp.category=pp.category.split()
-                pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
+            if str(pp['published_date'].year) == y and str(pp['published_date'].month) == m:
+                pp['category']=pp['category'].split()
+                #pp.text = markdown2.markdown(pp.text, extras=['fenced-code-blocks'], )
                 post_list2.append(pp)
                 print("+++++++++++++++++++++++++++%s " %post_list2)
             else:
-                print(pp.published_date.year)
-                print(pp.published_date.month)
+                print(pp['published_date'].year)
+                print(pp['published_date'].month)
     except Article.DoesNotExist:
         raise Http404
 
@@ -342,19 +349,20 @@ def logout_view(req):
 
 from collections import Counter
 def get_tags(): #返回标签和发布时间列表
-    postsAll = Article.objects.annotate(num_comment=Count('id')).filter(
+    postsAll = Article.objects.values('id','category','published_date').annotate(num_comment=Count('id')).filter(
         published_date__isnull=False).order_by('-published_date')
+    print(postsAll)
     tags = []
     for p in postsAll:
-        if  str(p.category) != '':
-            for i in p.category.split():
+        if  str(p['category']) != '':
+            for i in p['category'].split():
                 tags.append(i)
         #[str(p.category) for p in postsAll if str(p.category) != '']
     tags_dict = Counter(tags)
     tags_dict2=dict(tags_dict)
     tags_dict3=sorted(tags_dict2.items(),key=lambda item:item[1],reverse=True)
 
-    year_month_list = [(p.published_date.year, p.published_date.month) for p in postsAll]
+    year_month_list = [(p['published_date'].year, p['published_date'].month) for p in postsAll]
     year_month_dict = Counter(year_month_list)
     date_list = [(key[0], key[1], year_month_dict[key]) for key in year_month_dict]
     date_list.sort(reverse=True)

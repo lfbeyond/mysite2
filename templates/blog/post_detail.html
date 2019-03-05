@@ -41,10 +41,10 @@
 						<li><a href="#" class="icon fa-comment">128</a></li>
 						<div></div>
                         {% if before_page %}
-                            <li><a class="button arrowleft" href="{% url 'post_detail' pk=before_page.pk %}">上一篇：{{ before_page }}</a></li>
+                            <li><a class="button arrowleft" href="{% url 'post_detail' pk=before_page.id %}">上一篇：{{ before_page.title }}</a></li>
                         {% endif %}
                         {% if after_page %}
-						    <li><a <a class="button arrowleft"  href="{% url 'post_detail' pk=after_page.pk %}">下一篇 {{ after_page }}</a></li>
+						    <li><a class="button arrowleft"  href="{% url 'post_detail' pk=after_page.id %}">下一篇 {{ after_page.title  }}</a></li>
                         {% endif %}
 					</ul>
 				</footer>
