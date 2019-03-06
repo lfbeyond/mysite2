@@ -217,12 +217,12 @@ def blog_search(request):
         print('search-----------------------------------------')
         print(s)
         if not s:
-            #messages.add_message(request, messages.INFO, 'Hello world.')
-            return redirect('/')
+            messages.success(request, '搜索不能为空哦！.')
+            return render(request, 'blog/search.html', {'error': 'ture','message':messages})
         else:
             post_list = Article.objects.values('id','category','title','author','author_name','published_date').filter(category__icontains=s).order_by('-published_date')
             if len(post_list) == 0 :
-                #messages.success(request, "不能为空")
+                messages.success(request, "sorry！没有搜索到相关内容！")
                 return render(request, 'blog/search.html', {'error': 'ture','message':messages})
             else:
                 for pp in post_list:

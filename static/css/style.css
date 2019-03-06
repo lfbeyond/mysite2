@@ -54,7 +54,7 @@ body{
   text-align: center;
   font-size: 27px;
   font-weight: 500;
-  color: #F45B4B;
+  color: #040404;
   margin: 0px 0px 20px 0px;
 }
 .login-top input[type="text"] {
@@ -92,21 +92,21 @@ body{
 .forgot  a{
   font-size: 13px;
   font-weight: 500;
-  color: #F45B4B;
+  color: #06060;
   display: inline-block;
-  border-right: 2px solid #F45B4B;
+  border-right: 2px solid #06060;
   padding: 0px 7px 0px 0px;
 }
 .forgot  a:hover{
   color: #818181;
 }
 .forgot input[type="submit"] {
-  background: #F45B4B;
+  /*background: #F45B4B;*/
   color: #FFF;
-  font-size: 17px;
-  font-weight: 400;
-  padding: 8px 7px;
-  width: 20%;
+  font-size: 8px;
+  font-weight: 50;
+  padding: 4px 3px;
+  width: 50%;
   display: inline-block;
   cursor: pointer;
   border-radius: 6px;
@@ -128,7 +128,7 @@ body{
   text-align: right;
 }
 .login-bottom {
-  background: #E15748;
+  background: #e1e1e1;
   padding: 30px 65px;
   border-radius: 0px 0px 25px 25px;
   -webkit-border-radius:  0px 0px 25px 25px;
@@ -140,12 +140,12 @@ body{
 .login-bottom h3 {
   font-size: 14px;
   font-weight: 500;
-  color: #fff;
+  color: #0e0e0e;
 }
 .login-bottom h3 a {
   font-size: 25px;
   font-weight: 500;
-  color: #fff;
+  color: #0e0e0e;
 }
 .login-bottom h3 a:hover {
 	color:#696969;

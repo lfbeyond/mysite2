@@ -1,7 +1,6 @@
-
-<!DOCTYPE HTML>
+{% extends "blog/base.html" %}
+{% block content %}
 {% load staticfiles %}
-<html>
 <head>
 <title>注册</title>
 <!-- Custom Theme files -->
@@ -42,10 +41,4 @@
 		<h3>已有账户？ &nbsp;<a href="{% url 'login' %}">登录</a>&nbsp Here</h3>
 	</div>
 </div>
-<div class="copyright">
-	<p>Copyright &copy; li,s django blog<a target="_blank" href="{% url 'about_me' %}">关于li's django blog</a> - More Templates <a href="{% url 'post_list' %}"  target="_blank" title="保留">返回首页</a></p>
-</div>
-
-
-</body>
-</html>
+{% endblock %}
