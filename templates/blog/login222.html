@@ -1,6 +1,7 @@
-{% extends "blog/base.html" %}
-{% block content %}
+
+<!DOCTYPE HTML>
 {% load staticfiles %}
+<html>
 <head>
 <title>Home</title>
 <!-- Custom Theme files -->
@@ -12,6 +13,7 @@
 <meta name="keywords" content="Login form web template, Sign up Web Templates, Flat Web Templates, Login signup Responsive web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
 <!--Google Fonts-->
 </head>
+<body>
 <div class="login">
 	<h2>用户登录</h2>
 	<div class="login-top">
@@ -37,4 +39,10 @@
 		<h3>新用户 &nbsp;<a href="{% url 'register' %}">注册</a>&nbsp Here</h3>
 	</div>
 </div>
-{% endblock %}
+<div class="copyright">
+	<p>Copyright &copy; li,s django blog<a target="_blank" href="{% url 'about_me' %}">关于li's django blog</a> - More Templates <a href="{% url 'post_list' %}"  target="_blank" title="保留">返回首页</a></p>
+</div>
+
+
+</body>
+</html>

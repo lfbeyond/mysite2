@@ -32,26 +32,34 @@ def post_list(request):
         p['category'] = p['category'].split()
         p['pk']=p['id']
         p['author_id']=p['author']
-    paginator = Paginator(postsAll, 5)  # Show 10 contacts per page
-    page = request.GET.get('page')
+    # paginator = Paginator(postsAll, 5)  # Show 10 contacts per page
+    # page = request.GET.get('page')
+    print('-----------------------------')
+    current_page = request.GET.get('page')
+    if not current_page:
+        current_page=int(1)
+    #print(current_page)
+    paginator=myPaginator(current_page,5,postsAll,5)
     posts = []
+    print(paginator.max_pager_num)
     try:
-        posts = paginator.page(page)
+        posts = paginator.page(current_page)
     except PageNotAnInteger:
         # If page is not an integer, deliver first page.
         posts = paginator.page(1)
     except EmptyPage:
         # If page is out of range (e.g. 9999), deliver last page of results.
         posts = paginator.page(paginator.num_pages)
-    finally:
-        for pp in posts:
-            # pp.text = markdown.markdown(pp.text, extras=[
-            #                          'markdown.extensions.extra',
-            #                          'markdown.extensions.codehilite',
-            #                          'markdown.extensions.toc',
-            #                       ] )
-#            print(pp.text)
-            pp['user']=pp['author']
+#    finally:
+#         for pp in posts:
+#             # pp.text = markdown.markdown(pp.text, extras=[
+#             #                          'markdown.extensions.extra',
+#             #                          'markdown.extensions.codehilite',
+#             #                          'markdown.extensions.toc',
+#             #                       ] )
+#             print(pp.text)
+#             pp['user']=pp['author']
+    print(paginator.page_num_range())
     return render(request, 'blog/post_list.html', {'posts': posts, 'page': True,'tags':tags,'date_list':date_list2})
 
 from django.shortcuts import render, get_object_or_404
@@ -134,7 +142,6 @@ def post_draft_list(request,user_sigin):
     posts = Article.objects.filter(published_date__isnull=True).filter(author_id=user_sigin).order_by('-created_date')
     tags,date_list2=get_tags()
     #date_list2 = date_list()
-    #print('post_draft_list %s' %posts)
     for pp in posts:
         pp.category = pp.category.split()
         print('------------++++++++++ %s ' %user_sigin)
@@ -172,17 +179,15 @@ from django.http import Http404
 @cache_page(60)
 def archives(request):
     tags,date_list2=get_tags()
-    #date_list2 = date_list()
     try:
         post_list = Article.objects.values('id','title','author','author_name','published_date').filter(published_date__isnull=False).order_by('-published_date')
         post_list2=[]
         for a in post_list:
-            #print("user------------------author1 %s" % a.author.id)
             a['user'] = a['author']
-            #print("user------------------author %s" %a.user)
     except Article.DoesNotExist:
         raise Http404
-    print(post_list)
+
+
     return render(request, 'blog/archives.html',
                   {'post_list': post_list, 'error': False, 'tags': tags, 'date_list': date_list2})
 
@@ -351,7 +356,7 @@ from collections import Counter
 def get_tags(): #返回标签和发布时间列表
     postsAll = Article.objects.values('id','category','published_date').annotate(num_comment=Count('id')).filter(
         published_date__isnull=False).order_by('-published_date')
-    print(postsAll)
+    #print(postsAll)
     tags = []
     for p in postsAll:
         if  str(p['category']) != '':
@@ -366,7 +371,7 @@ def get_tags(): #返回标签和发布时间列表
     year_month_dict = Counter(year_month_list)
     date_list = [(key[0], key[1], year_month_dict[key]) for key in year_month_dict]
     date_list.sort(reverse=True)
-    print(tags_dict3,date_list)
+    #print(tags_dict3,date_list)
     return tags_dict3,date_list
 
 # def date_list():

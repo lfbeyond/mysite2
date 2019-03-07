@@ -33,3 +33,46 @@ class Profile(models.Model):
 
     def __unicode__(self):
         return self.user.username
+
+
+from django.core.paginator import Paginator
+class myPaginator(Paginator):
+    """
+    是自定制django分页类的方法
+    :page_num_range 显示返回页数范围
+    :current_page  当前页数
+    :max_page_num 最大显示的页码数
+    """
+    def __init__(self, current_page, max_pager_num, *args, **kwargs):
+        # 当前页
+        self.current_page = int(current_page)
+        # 最多显示的页码数量
+        self.max_pager_num = int(max_pager_num)
+        super(myPaginator,self).__init__(*args, **kwargs)
+
+    def page_num_range(self):
+        # 当前页
+        # self.current_page
+        # 最多显示的页码数量 11
+        # self.per_pager_num
+        # 总页数
+        # self.num_pages
+
+        # 判断如果页面总数量小于显示页面的总数量，那么返回最大的页面总数量。
+        if self.num_pages < self.max_pager_num:
+            return range(1, self.num_pages + 1)
+        part = int(self.max_pager_num / 2)
+
+        # 判断当前页小于等于最大显示页的一半，那么返回1到最大显示页数量。
+        if self.current_page <= part:
+            return range(1, self.max_pager_num + 1)
+
+        # 当选择页数加上显示页数的一半的时候，说明越界了，例如最大也数是15，显示页数是10，我选择11页，那么11+5等于16，大于15，那么就显示总页数15-11+1，15+1
+        if (self.current_page + part) > self.num_pages:
+            # 那么返回总页数前去当前显示页数个数+1的值，和总页数+1的值。
+            return range(self.num_pages - self.max_pager_num + 1, self.num_pages + 1)
+
+        # 当选择页大于当前总页数的一半的时候，返回当前选择页的前五个和后五个页数。
+        return range(self.current_page - part, self.current_page + part + 1)
+
+
