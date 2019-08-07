@@ -1,3 +1,6 @@
+*.pyc
+__pycache__
+db.sqlite3
 /srv/mysite2/media/*.jpg
 /srv/mysite2/media/*.png
 /srv/mysite2/media/*.gif

@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f2d89963-1810-4d39-9b3e-093ef3a40094" name="Default Changelist" comment="0305">
-      <change afterPath="$PROJECT_DIR$/templates/blog/login222.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/blog/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/blog/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/archives.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/archives.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/blog/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/blog/post_list.html" afterDir="false" />
-    </list>
+    <list default="true" id="f2d89963-1810-4d39-9b3e-093ef3a40094" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +53,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/blog/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3069">
+            <state relative-caret-position="2157">
               <caret line="188" selection-start-line="188" selection-end-line="188" />
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
@@ -150,8 +141,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="80" />
-    <option name="y" value="115" />
+    <option name="x" value="325" />
+    <option name="y" value="122" />
     <option name="width" value="1518" />
     <option name="height" value="961" />
   </component>
@@ -306,7 +297,7 @@
       <workItem from="1551249059859" duration="26430000" />
       <workItem from="1551620154344" duration="847000" />
       <workItem from="1551621263220" duration="27548000" />
-      <workItem from="1551782463301" duration="20681000" />
+      <workItem from="1551782463301" duration="21432000" />
     </task>
     <task id="LOCAL-00001" summary="e">
       <created>1551501056424</created>
@@ -343,11 +334,18 @@
       <option name="project" value="LOCAL" />
       <updated>1551865557561</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="0307">
+      <created>1551945090659</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1551945090659</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80483000" />
+    <option name="totallyTimeSpent" value="81234000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -442,7 +440,8 @@
     <MESSAGE value="e" />
     <MESSAGE value="0305" />
     <MESSAGE value="0306" />
-    <option name="LAST_COMMIT_MESSAGE" value="0306" />
+    <MESSAGE value="0307" />
+    <option name="LAST_COMMIT_MESSAGE" value="0307" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/comments/__init__.py">
@@ -645,7 +644,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/blog/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3069">
+        <state relative-caret-position="2157">
           <caret line="188" selection-start-line="188" selection-end-line="188" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />

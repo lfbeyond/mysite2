@@ -120,7 +120,7 @@ from django.shortcuts import redirect
 #@login_required
 @csrf_exempt
 def post_new(request):
-    date_list2,tags=get_tags()
+    tags,date_list2=get_tags()
     #date_list2 = date_list()
     if request.method == "POST":
         form = ArticleForm(request.POST)

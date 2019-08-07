@@ -49,8 +49,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
      # 站点缓存 ， 注意必须在第一个位置    
-   'django.middleware.cache.UpdateCacheMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
+#    'django.middleware.cache.UpdateCacheMiddleware',    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -59,42 +58,28 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
      # 站点缓存, 注意必须在最后一个位置
-    'django.middleware.cache.FetchFromCacheMiddleware',
-]
-
-MIDDLEWARE_CLASSES = [
-     # 站点缓存 ， 注意必须在第一个位置
-   'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-     # 站点缓存, 注意必须在最后一个位置
-    'django.middleware.cache.FetchFromCacheMiddleware',
+ #   'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
 
-# CACHES = {
-#         "default": {
-#             "BACKEND": "django_rediscache.RedisCache",
-#             #'BACKEND': 'redis_cache.RedisCache',
-#             #'LOCATION': '127.0.0.1:6379',
-#             "LOCATION": "redis://123.56.12.78:6379",
-#             "OPTIONS": {
-#                 'DB': 1,
-#                 #'TIMEOUT': 600,
-#                 #'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
-#                 'CLIENT_CLASS': "django_redis.client.DefaultClient",
-#                 'PASSWORD' : "redhat"
-#
-#                 },
-#             "KEY_PREFIX":"example"
-#             },
-#         }
+CACHES = { 
+        "default": { 
+            "BACKEND": "django_redis.cache.RedisCache", 
+            #'BACKEND': 'redis_cache.RedisCache',
+            #'LOCATION': '127.0.0.1:6379',
+            "LOCATION": "redis://123.56.12.78:6379", 
+            "OPTIONS": { 
+                'DB': 1,
+                #'TIMEOUT': 600,
+                #'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
+                'CLIENT_CLASS': "django_redis.client.DefaultClient", 
+                'PASSWORD' : "redhat"    
+
+                },
+            "KEY_PREFIX":"example"
+            }, 
+        }
 
 SESSION_COOKIE_AGE=30 * 60
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
@@ -128,8 +113,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'firstblog',
         'USER':'root',
-        'PASSWORD':'wkl123',
-        'HOST':'172.16.1.109',
+        'PASSWORD':'redhat',
+        'HOST':'127.0.0.1',
         'PORT':'3306',
         'OPTIONS': {
             'autocommit': True,
@@ -178,12 +163,7 @@ STATIC_URL = '/static/'
 LOGIN_REDIRECT_URL = '/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
-    os.path.join(BASE_DIR, 'images').replace('\\', '/'),
 )
-
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT =  os.path.join(BASE_DIR, "media")
-
-###########################
