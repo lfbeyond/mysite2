@@ -1,3 +1,4 @@
+#-*- coding: UTF-8 -*-   
 """
 Django settings for first_blog project.
 
@@ -48,7 +49,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-     # 站点缓存 ， 注意必须在第一个位置    
+# 站点缓存 ， 注意必须在第一个位置    
 #    'django.middleware.cache.UpdateCacheMiddleware',    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -63,23 +64,23 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mysite.urls'
 
-CACHES = { 
-        "default": { 
-            "BACKEND": "django_redis.cache.RedisCache", 
-            #'BACKEND': 'redis_cache.RedisCache',
-            #'LOCATION': '127.0.0.1:6379',
-            "LOCATION": "redis://123.56.12.78:6379", 
-            "OPTIONS": { 
-                'DB': 1,
-                #'TIMEOUT': 600,
+#CACHES = { 
+#        "default": { 
+#            "BACKEND": "django_redis.cache.RedisCache", 
+#            #'BACKEND': 'redis_cache.RedisCache',
+#            #'LOCATION': '127.0.0.1:6379',
+#            "LOCATION": "redis://127.0.0.1:6379", 
+#            "OPTIONS": { 
+#                'DB': 1,
+#                #'TIMEOUT': 600,
                 #'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
-                'CLIENT_CLASS': "django_redis.client.DefaultClient", 
-                'PASSWORD' : "redhat"    
+#                'CLIENT_CLASS': "django_redis.client.DefaultClient", 
+#                'PASSWORD' : "redhat"    
 
-                },
-            "KEY_PREFIX":"example"
-            }, 
-        }
+#                },
+#            "KEY_PREFIX":"example"
+#            }, 
+#        }
 
 SESSION_COOKIE_AGE=30 * 60
 SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
@@ -114,8 +115,9 @@ DATABASES = {
         'NAME': 'firstblog',
         'USER':'root',
         'PASSWORD':'redhat',
-        'HOST':'127.0.0.1',
+        'HOST':'192.168.177.1',
         'PORT':'3306',
+        'CHARSET':'utf8mb4',
         'OPTIONS': {
             'autocommit': True,
         },

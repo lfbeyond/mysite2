@@ -20,7 +20,7 @@ from blog import views
 import django.contrib.auth.views
 from mysite.settings import MEDIA_ROOT
 from django.views.static import serve
-
+from django.contrib.auth import views as auth_views
 urlpatterns = [
     url(r'admin/',admin.site.urls),
     url(r'^$',views.post_list,  name='post_list'),
@@ -34,7 +34,7 @@ urlpatterns = [
     url(r'^tag/tag(?P<tag>\w+)/$', views.search_tag, name='search_tag'),
     url(r'^aboutme/$', views.about_me, name='about_me'),
     #url(r'^accounts/login/$',django.contrib.auth.views.login, name='login'),
-    url(r'^accounts/logout/$', django.contrib.auth.views.logout, name='logout', kwargs={'next_page': '/'}),
+    url(r'^accounts/logout/$', auth_views.LogoutView.as_view(), name='logout', kwargs={'next_page': '/'}),
     url(r'^search/$', views.blog_search, name='search'),
     url(r'^user/user(?P<user_id>\w+)/$', views.search_user, name='search_user'),
     url(r'^date/(?P<y>[0-9]{4})/(?P<m>[0-9]{1,2})$', views.search_date, name='search_date'),

@@ -3,7 +3,7 @@ from django.shortcuts import render
 import sys,io
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 # Create your views here.
-from django.shortcuts import render,render_to_response
+from django.shortcuts import render
 from .models import *
 from django.http import Http404
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger

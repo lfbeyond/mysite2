@@ -4,8 +4,8 @@ from django.contrib.auth.models import User
 from DjangoUeditor.models import UEditorField
 
 class Article(models.Model):
-    author = models.ForeignKey(User)
-    author_name = models.CharField(max_length=200)
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    author_name = models.CharField(max_length=200,default="")
     title = models.CharField(max_length=200)
     category = models.CharField(max_length=50, blank=True)
     #text = models.TextField()
@@ -25,7 +25,7 @@ from django.db import models
 from django.conf import settings
 class Profile(models.Model):
 
-    user = models.OneToOneField(settings.AUTH_USER_MODEL)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,on_delete=models.CASCADE)
     image = models.ImageField(upload_to='static/image/%Y/%m', default='static/image/default.jpg', max_length=200,
                               blank=True, null=True, verbose_name='用户头像')
     created_dt = models.DateTimeField(auto_now_add=True, db_index=True)

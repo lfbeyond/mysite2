@@ -8,10 +8,10 @@ from django.views.decorators.csrf import csrf_exempt
 import datetime
 import random
 import urllib
-from django.utils import six
+#from django.utils import six
 
-if six.PY3:
-    long = int
+#if six.PY3:
+#    long = int
 
 
 def get_path_format_vars():
