@@ -15006,7 +15006,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 --- templates/blog/base.html	(revision )
 +++ templates/blog/base.html	(revision )
 @@ -0,0 +1,128 @@
-+{% load staticfiles %}
++{% load static %}
 +
 +<html>
 +
@@ -16280,7 +16280,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 --- templates - 副本/blog/login.html	(revision )
 +++ templates - 副本/blog/login.html	(revision )
 @@ -0,0 +1,59 @@
-+{% load staticfiles %}
++{% load static %}
 +<html>
 +<head>
 +    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -16348,7 +16348,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 --- templates/blog/login.html	(revision )
 +++ templates/blog/login.html	(revision )
 @@ -0,0 +1,84 @@
-+{% load staticfiles %}
++{% load static %}
 +<html>
 +<head>
 +    <meta charset="utf-8">
@@ -17263,7 +17263,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 --- templates - 副本/blog/base.html	(revision )
 +++ templates - 副本/blog/base.html	(revision )
 @@ -0,0 +1,123 @@
-+{% load staticfiles %}
++{% load static %}
 +<html>
 +
 +
@@ -21186,7 +21186,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 --- templates - 副本/registration/login.html	(revision )
 +++ templates - 副本/registration/login.html	(revision )
 @@ -0,0 +1,68 @@
-+{% load staticfiles %}
++{% load static %}
 +<html>
 +<head>
 +    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
@@ -21287,7 +21287,7 @@ Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
 --- templates/registration/login.html	(revision )
 +++ templates/registration/login.html	(revision )
 @@ -0,0 +1,68 @@
-+{% load staticfiles %}
++{% load static %}
 +<html>
 +<head>
 +    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>

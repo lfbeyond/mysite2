@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     #'blog.apps.BlogConfig',
     'markdown',
     'pygments',
-    'blog',
+    'blog', 
     'comments',
     'DjangoUeditor',
     #'xadmin',
@@ -68,13 +68,13 @@ CACHES = {
             "BACKEND": "django_redis.cache.RedisCache", 
             #'BACKEND': 'redis_cache.RedisCache',
             #'LOCATION': '127.0.0.1:6379',
-            "LOCATION": "redis://123.56.12.78:6379", 
+            "LOCATION": "redis://192.168.2.209:26379", 
             "OPTIONS": { 
-                'DB': 1,
+                #'DB': 1,
                 #'TIMEOUT': 600,
                 #'CONNECTION_POOL_CLASS': 'redis.BlockingConnectionPool',
                 'CLIENT_CLASS': "django_redis.client.DefaultClient", 
-                'PASSWORD' : "redhat"    
+                'PASSWORD' : "d9FWwproeu1xjvMW"    
 
                 },
             "KEY_PREFIX":"example"
@@ -113,9 +113,9 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'firstblog',
         'USER':'root',
-        'PASSWORD':'redhat',
-        'HOST':'127.0.0.1',
-        'PORT':'3306',
+        'PASSWORD':'mysql',
+        'HOST':'192.168.2.209',
+        'PORT':'33306',
         'OPTIONS': {
             'autocommit': True,
         },
