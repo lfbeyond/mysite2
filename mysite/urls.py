@@ -20,8 +20,14 @@ from blog import views
 import django.contrib.auth.views
 from mysite.settings import MEDIA_ROOT
 from django.views.static import serve
+#新的富文本mdeditor
+from django.conf.urls import  include, url
+from django.conf.urls.static import static
+from django.conf import settings
+#新的富文本mdeditor
 
 urlpatterns = [
+    url(r'^ckeditor/', include('ckeditor_uploader.urls')),
     url(r'admin/',admin.site.urls),
     url(r'^$',views.post_list,  name='post_list'),
     url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
@@ -45,4 +51,11 @@ urlpatterns = [
     url(r'^ueditor/', include('DjangoUeditor.urls')),
     #url(r'^xadmin/', xadmin.site.urls)
     url(r'^media/(?P<path>.*)$',  serve,{"document_root": MEDIA_ROOT}),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  ## 没有这一句无法显示上传的图片
+
+
+
+
+# if settings . DEBUG :
+#      # static files (images, css, javascript, etc.)
+#      urlpatterns += static ( settings . MEDIA_URL , document_root = settings . MEDIA_ROOT )

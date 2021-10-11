@@ -19,10 +19,10 @@ from comments.forms import CommentForm
 #redis
 
 from django.conf import settings
-from django.views.decorators.cache  import  cache_page
+#from django.views.decorators.cache  import  cache_page
 from django.contrib import messages
 
-@cache_page(60)
+#@cache_page(60)
 def post_list(request):
     postsAll = Article.objects.values('id','title','author','author_name','category','published_date').annotate(num_comment=Count('id')).filter(published_date__isnull=False).order_by('-published_date')
     #postsAll = Article.objects.annotate(num_comment=Count('id')).filter(published_date__isnull=False).order_by('-published_date')
@@ -65,7 +65,7 @@ def post_list(request):
 from django.shortcuts import render, get_object_or_404
 import re
 
-@cache_page(60)
+#@cache_page(60)
 def post_detail(request, pk):
     tags,date_list2= get_tags()
     #date_list2 = date_list()
@@ -137,7 +137,7 @@ def post_new(request):
 
 
 
-@cache_page(60)
+#@cache_page(60)
 def post_draft_list(request,user_sigin):
     posts = Article.objects.filter(published_date__isnull=True).filter(author_id=user_sigin).order_by('-created_date')
     tags,date_list2=get_tags()
@@ -176,7 +176,7 @@ def post_remove(request, pk):
 
 from django.http import Http404
 
-@cache_page(60)
+#@cache_page(60)
 def archives(request):
     tags,date_list2=get_tags()
     try:
@@ -207,7 +207,7 @@ def search_tag(request, tag):
 
     return render(request, 'blog/tag.html', {'post_list' : post_list,'tags':tags,'date_list':date_list2})
 
-@cache_page(60)
+#@cache_page(60)
 def about_me(request):
     tags,date_list2=get_tags()
     #date_list2 = date_list()

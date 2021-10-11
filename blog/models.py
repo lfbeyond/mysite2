@@ -3,13 +3,19 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from DjangoUeditor.models import UEditorField
 
+
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField
+
+
 class Article(models.Model):
     author = models.ForeignKey(User,on_delete=models.CASCADE)
     author_name = models.CharField(max_length=200)
     title = models.CharField(max_length=200)
     category = models.CharField(max_length=50, blank=True)
     #text = models.TextField()
-    text= UEditorField(verbose_name='正文',width=800, height=300, toolbars="full", imagePath="ueditor/pic/", filePath="ueditor/file/", upload_settings={"elementPathEnabled":True},blank=True,default='')
+    #text= RichTextUploadingField(verbose_name='正文',width=800, height=300, toolbars="full", imagePath="ueditor/pic/", filePath="ueditor/file/", upload_settings={"elementPathEnabled":True},blank=True,default='')
+    text= RichTextUploadingField(verbose_name='正文')
 
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)

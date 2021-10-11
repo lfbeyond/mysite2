@@ -7,4 +7,4 @@ from .models import Article
 admin.site.register(Article)
 
 class BlogAdmin(object):
-    style_fields = {'text': 'ueditor'}
+    style_fields = {'text'}
