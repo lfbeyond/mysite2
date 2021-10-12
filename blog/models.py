@@ -6,7 +6,7 @@ from DjangoUeditor.models import UEditorField
 
 from ckeditor.fields import RichTextField
 from ckeditor_uploader.fields import RichTextUploadingField
-
+from mdeditor.fields import MDTextField
 
 class Article(models.Model):
     author = models.ForeignKey(User,on_delete=models.CASCADE)
@@ -15,7 +15,7 @@ class Article(models.Model):
     category = models.CharField(max_length=50, blank=True)
     #text = models.TextField()
     #text= RichTextUploadingField(verbose_name='正文',width=800, height=300, toolbars="full", imagePath="ueditor/pic/", filePath="ueditor/file/", upload_settings={"elementPathEnabled":True},blank=True,default='')
-    text= RichTextUploadingField(verbose_name='正文')
+    text= MDTextField(verbose_name='正文')
 
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True)

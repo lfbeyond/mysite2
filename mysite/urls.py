@@ -28,6 +28,8 @@ from django.conf import settings
 
 urlpatterns = [
     url(r'^ckeditor/', include('ckeditor_uploader.urls')),
+    url(r'mdeditor/', include('mdeditor.urls')),
+    
     url(r'admin/',admin.site.urls),
     url(r'^$',views.post_list,  name='post_list'),
     url(r'^post/(?P<pk>[0-9]+)/$', views.post_detail, name='post_detail'),
@@ -56,6 +58,6 @@ urlpatterns = [
 
 
 
-# if settings . DEBUG :
-#      # static files (images, css, javascript, etc.)
-#      urlpatterns += static ( settings . MEDIA_URL , document_root = settings . MEDIA_ROOT )
+if settings . DEBUG :
+     # static files (images, css, javascript, etc.)
+     urlpatterns += static ( settings . MEDIA_URL , document_root = settings . MEDIA_ROOT )

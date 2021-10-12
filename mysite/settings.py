@@ -47,7 +47,8 @@ INSTALLED_APPS = [
     'comments',
     #'DjangoUeditor',
     #'xadmin',
-    'crispy_forms'
+    'crispy_forms',
+    'mdeditor'
 ]
 
 MIDDLEWARE = [

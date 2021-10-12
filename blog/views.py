@@ -72,7 +72,7 @@ def post_detail(request, pk):
     post = get_object_or_404(Article, pk=str(pk))
     #print(post.id)
     #print("------------------post_detail")
-    post.text = markdown.markdown(post.text, extras=[
+    post.text = markdown.markdown(post.text.replace("\r\n",' \n'),extensions=[
                                      'markdown.extensions.extra',
                                      'markdown.extensions.codehilite',
                                      'markdown.extensions.toc',
@@ -93,7 +93,6 @@ def post_detail(request, pk):
         postsAll = Article.objects.values('id','title').filter(
             published_date__isnull=False).order_by('-published_date')
         page_list = list(postsAll)
-        print('==============----------------====================')
         print(page_list)
         if post.id == page_list[-1]['id']:
              #print(post)
@@ -144,8 +143,6 @@ def post_draft_list(request,user_sigin):
     #date_list2 = date_list()
     for pp in posts:
         pp.category = pp.category.split()
-        print('------------++++++++++ %s ' %user_sigin)
-        print('------------++++++++++ %s ' % pp.category)
     return render(request, 'blog/post_draft_list.html', {'posts': posts,'tags':tags,'date_list':date_list2})
 
 def post_publish(request, pk):
