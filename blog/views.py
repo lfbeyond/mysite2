@@ -16,9 +16,10 @@ from django.contrib import auth
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from comments.forms import CommentForm
-#redis
+
 
 from django.conf import settings
+#redis缓存，关闭不用了.懒得装redis服务器
 #from django.views.decorators.cache  import  cache_page
 from django.contrib import messages
 
