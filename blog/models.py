@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
-from DjangoUeditor.models import UEditorField
+#from DjangoUeditor.models import UEditorField
 
 
 from ckeditor.fields import RichTextField
