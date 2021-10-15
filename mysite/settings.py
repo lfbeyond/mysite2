@@ -65,18 +65,18 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'mysite.urls'
 
-CACHES = { 
-        "default": { 
-            "BACKEND": "django_redis.cache.RedisCache", 
-            "LOCATION": "redis://192.168.2.209:26379", 
-            "OPTIONS": { 
-                'CLIENT_CLASS': "django_redis.client.DefaultClient", 
-                'PASSWORD' : "d9FWwproeu1xjvMW"    
+# CACHES = { 
+#         "default": { 
+#             "BACKEND": "django_redis.cache.RedisCache", 
+#             "LOCATION": "redis://192.168.2.209:26379", 
+#             "OPTIONS": { 
+#                 'CLIENT_CLASS': "django_redis.client.DefaultClient", 
+#                 'PASSWORD' : "d9FWwproeu1xjvMW"    
 
-                },
-            "KEY_PREFIX":"example"
-            }, 
-        }
+#                 },
+#             "KEY_PREFIX":"example"
+#             }, 
+#         }
 
 # 设置的登录信息保存时间
 SESSION_COOKIE_AGE=1209600
@@ -112,8 +112,8 @@ DATABASES = {
         'NAME': 'firstblog',
         'USER':'root',
         'PASSWORD':'redhat',
-        'HOST':'192.168.2.209',
-        'PORT':'33306',
+        'HOST':'127.0.0.1',
+        'PORT':'3306',
         'OPTIONS': {
             'autocommit': True,
         },

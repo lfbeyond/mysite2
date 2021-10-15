@@ -16,6 +16,7 @@ Including another URLconf
 #import xadmin
 from django.contrib import admin
 from django.conf.urls import  include, url
+from django.contrib.auth import logout
 from blog import views
 import django.contrib.auth.views
 from mysite.settings import MEDIA_ROOT
@@ -42,7 +43,9 @@ urlpatterns = [
     url(r'^tag/tag(?P<tag>\w+)/$', views.search_tag, name='search_tag'),
     url(r'^aboutme/$', views.about_me, name='about_me'),
     #url(r'^accounts/login/$',django.contrib.auth.views.LoginView, name='login'),
-    url(r'^accounts/logout/$', django.contrib.auth.views.LogoutView, name='logout', kwargs={'next_page': '/'}),
+    #url(r'^accounts/logout/$', django.contrib.auth.views.LogoutView, name='logout', kwargs={'next_page': '/'}),
+    url(r'^accounts/logout/$', views.logout_view, name='logout'),
+
     url(r'^search/$', views.blog_search, name='search'),
     url(r'^user/user(?P<user_id>\w+)/$', views.search_user, name='search_user'),
     url(r'^date/(?P<y>[0-9]{4})/(?P<m>[0-9]{1,2})$', views.search_date, name='search_date'),

@@ -73,7 +73,9 @@ def post_detail(request, pk):
     post = get_object_or_404(Article, pk=str(pk))
     #print(post.id)
     #print("------------------post_detail")
-    post.text = markdown.markdown(post.text.replace("\r\n",' \n'),extensions=[
+    #post.text = markdown.markdown(post.text.replace("\r\n",' \n'),extensions=[
+    post.text = markdown.markdown(post.text,
+                            extensions=[        
                                      'markdown.extensions.extra',
                                      'markdown.extensions.codehilite',
                                      'markdown.extensions.toc',
@@ -117,7 +119,7 @@ def post_detail(request, pk):
 
 from .forms import ArticleForm
 from django.shortcuts import redirect
-#@login_required
+@login_required
 @csrf_exempt
 def post_new(request):
     tags,date_list2=get_tags()
@@ -349,6 +351,7 @@ def logout_view(req):
     #清理cookie里保存username
     auth.logout(req)
     return redirect('/')
+
 
 from collections import Counter
 def get_tags(): #返回标签和发布时间列表
