@@ -98,8 +98,11 @@ def post_detail(request, pk):
         page_list = list(postsAll)
         print(page_list)
         if post.id == page_list[-1]['id']:
-             #print(post)
-             before_page = page_list[-2]
+             print(post.id)
+             try:
+                before_page = page_list[-2]
+             except:
+                 before_page = None
              after_page = None
         elif post.id == page_list[0]['id']:
              #print(post)

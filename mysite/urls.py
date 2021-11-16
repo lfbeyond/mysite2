@@ -53,7 +53,7 @@ urlpatterns = [
     url(r'^login$', views.login_view,name='login'),
     #url(r'^post/(?P<pk_post>[0-9]+)/$', views2.post_comment, name='post_comment'),
     url(r'', include('comments.urls',namespace="comments")),
-    url(r'^ueditor/', include('DjangoUeditor.urls')),
+    #url(r'^ueditor/', include('DjangoUeditor.urls')),
     #url(r'^xadmin/', xadmin.site.urls)
     url(r'^media/(?P<path>.*)$',  serve,{"document_root": MEDIA_ROOT}),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)  ## 没有这一句无法显示上传的图片
